@@ -38,12 +38,6 @@ var TodoList = Backbone.Collection.extend({
 var TodoView = Backbone.View.extend({
   template: _.template($('#ListViewTemplate').html()),
 
-  // tagName: 'li'
-  //
-  // events:{
-  //   'click' : 'toggleTodo'
-  // },
-
   initialize: function(){
     this.listenTo(this.collection, 'change', this.render);
   },
@@ -62,7 +56,33 @@ var HomeView = Backbone.View.extend({
   render: function(){
     this.$el.html(this.template());
     return this;
+  },
+  events: {
+    'click .submit' : 'handleSubmitClick',
+    'keypress #newTodo' : 'handleSubmitEnter'
+  },
+
+  // this function will be called after the handleEnter and handleSendClick is run.
+  // below is where the input value will be stored to the correct input.
+
+  handleSubmitClick : function(){
+    // if (event.keycode === 13)
+    var item = $('#newTodo').val()
+    console.log(item)
+  },
+
+  handleSubmitEnter : function(event){
+    if(event.keyCode === 13 ){
+      this.handleSubmitClick();
+    }
   }
+
+  // listen to the key click, which is defined above
+//
+//   handleSubmitClick: function(event){
+//
+//     return item;
+//   },
 });
 
 // this view will create a new view where we can handle the users interaction.
