@@ -7,25 +7,33 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <h1> todo list</h1>
-  <p>
+  <!-- <p>
     <button id="newTodo">Add item</button>
     <button id="editTodo">Edit</button>
-  </p>
+    <button class="toggleButton"> toggle</button>
+    <span class="words">wordssss</span>
+  </p> -->
 
-  <ul>
-    <li>
-      <input type="checkbox"/>
-    </li>
-  </ul>
-  <!-- <section id= "todoapp">
-    <header id="header>
-      <h1>Todos</h1>
-      <input id="new-todo" placeholder="what needs to be done?">
+  <section id= "todoApp">
+    <header id="header">
+      <script type="text/template" id="HomeViewTemplate">
+        <h2>Todos</h2>
+        <input id="newTodo" placeholder="what needs to be done?">
+      </script>
     </header>
-    <section id="main">
-      <ul id="todo-list"></ul>
+  <section id="main">
+      <script type="text/template" id="ListViewTemplate">
+        <ul id="todo-list"><div>todos</div>
+          <% _.forEach(todos, function(todo){ %>
+            <li>
+              <input type="checkbox"/>
+              <a href="#todo/<%=todo._id%>"><%= todo.toDo %> <%= todo.toDo %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </script>
     </section>
-  </section> -->
+  </section>
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
