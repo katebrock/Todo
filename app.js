@@ -1,3 +1,7 @@
+//get new template to show when button is clicked 'add new'
+// get home template to add item to new list once it is clicked
+
+
 ///////////////////////////////
 ///////////////////////////////
 //          models           //
