@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <h1> todo list</h1>
+  <h1> What would you like to do today?</h1>
   <!-- <p>
     <button id="newTodo">Add item</button>
     <button id="editTodo">Edit</button>
@@ -17,14 +17,14 @@
   <section id= "todoApp">
     <header id="header">
       <script type="text/template" id="HomeViewTemplate">
-        <h2>Todos</h2>
+        <!-- <h2>Todos</h2> -->
         <input type="text" value="" id="newTodo" placeholder="what needs to be done?">
         <button type="submit" class="submit" value='submit'>Add Todo</button>
       </script>
     </header>
   <section id="main">
       <script type="text/template" id="ListViewTemplate">
-        <ul id="todo-list"><div>todos</div>
+        <ul id="todo-list">
           <% _.forEach(todos, function(todo){ %>
             <li>
               <input type="checkbox"/>

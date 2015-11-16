@@ -1,5 +1,6 @@
 //get new template to show when button is clicked 'add new'
-// get home template to add item to new list once it is clicked
+//get home template to add item to new list once it is clicked
+//got my views to actually show up in the console!!!!
 
 
 ///////////////////////////////
@@ -11,6 +12,7 @@
 //creates a model for the to-do list
 
 var Todo = Backbone.Model.extend({
+  url: 'http://tiny-starburst.herokuapp.com/collections/katetodo',
   defaults:{
     //the todo lists attributes and values
     title  : "",
@@ -27,6 +29,7 @@ var Todo = Backbone.Model.extend({
 //creates a collection of the todos
 
 var TodoList = Backbone.Collection.extend({
+  url: 'http://tiny-starburst.herokuapp.com/collections/katetodo',
   model : Todo,
 });
 
@@ -62,9 +65,18 @@ var HomeView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click .submit' : 'handleSubmitClick',
+    'click .submit'     : 'handleSubmitClick',
     'keypress #newTodo' : 'handleSubmitEnter'
   },
+  send: function(){
+    var setValue = this.$('#newTodo').val();
+
+    var addTodo = new todo({
+      todo : setValue
+    });
+    addTodo.save();
+  },
+
 
   // this function will be called after the handleEnter and handleSendClick is run.
   // below is where the input value will be stored to the correct input.
@@ -78,15 +90,11 @@ var HomeView = Backbone.View.extend({
   handleSubmitEnter : function(event){
     if(event.keyCode === 13 ){
       this.handleSubmitClick();
+      this.send();
+      $('#newTodo').val("");
     }
-  }
+  },
 
-  // listen to the key click, which is defined above
-//
-//   handleSubmitClick: function(event){
-//
-//     return item;
-//   },
 });
 
 // this view will create a new view where we can handle the users interaction.
@@ -156,13 +164,7 @@ var HomeView = Backbone.View.extend({
 //   }
 // },
 
-//listen to the key click, which is defined above
 
-// handleSubmitClick: function(event){
-//   if (event.keycode === 13) {
-//     this.send();
-//   }
-// },
 
 //////////////////////////////
 //        routes            //
@@ -174,15 +176,29 @@ var Router = Backbone.Router.extend({
   },
 
   home: function(){
-    // console.log('called home..et');
     //creates a new homepage view
-    var mainView = new HomeView();
+    var view = new HomeView();
     //renders the template to the view
-    mainView.render();
+    view.render();
     //renders the view to the main tag
-    $('header').html(mainView.el);
-  },
+    $('header').html(view.el);
+
+    var collection = new TodoList();
+    var listView = new TodoView({
+      collection : collection
+    });
+
+    collection.fetch({
+      success : function(){
+        listView.render();
+        $('#main').html(listView.el);
+      }
+    })
+  }
 });
+
+
+
 
 // function buildDropDown(){
 //   App.collection = new TodoList();
